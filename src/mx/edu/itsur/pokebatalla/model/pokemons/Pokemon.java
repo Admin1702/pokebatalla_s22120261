@@ -4,12 +4,15 @@
  */
 package mx.edu.itsur.pokebatalla.model.pokemons;
 
+import java.io.Serializable;
+import java.util.List;
+import mx.edu.itsur.pokebatalla.model.moves.Movimiento;
+
 /**
  *
  * @author FJML1983
  */
-public abstract class Pokemon {
-
+public abstract class Pokemon implements Serializable{
     //Atributos
     protected String tipo;
     protected String nombre;
@@ -18,7 +21,7 @@ public abstract class Pokemon {
     protected int ataque;
     protected int defensa;
     protected double precision;
-    protected int xp; //https://www.wikidex.net/wiki/Experiencia_base
+    protected int xp; 
     
     Pokemon() {
     }
@@ -33,11 +36,10 @@ public abstract class Pokemon {
     public int getDefensa(){
         return defensa;
     }
-
-    public int getHp() {
+    public int getHp()
+    {
         return hp;
-    }       
-    
+    }
     //Setters
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -48,16 +50,16 @@ public abstract class Pokemon {
         this.hp = this.hp - danio;
     }        
     
-    public abstract void atacar(Pokemon oponente, int ordinalMovimiento );
+    public abstract void atacar(Pokemon oponente, int ordinalMovimiento);
 
-    //Devolver la lista de movimientos disponibles del pokemon.
-    public abstract Enum[] getMovimientos();
-    
+     public abstract Enum[] getMovimientos();
+
     @Override
     public String toString() {
 
         return this.getClass().getSimpleName() + 
                 "{tipo:" + tipo + " hp:" + hp + "}";
     }
+
 
 }

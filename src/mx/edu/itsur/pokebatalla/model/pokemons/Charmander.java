@@ -4,25 +4,29 @@
  */
 package mx.edu.itsur.pokebatalla.model.pokemons;
 
+import java.io.Serializable;
 import mx.edu.itsur.pokebatalla.model.moves.AtaqueRapido;
-import mx.edu.itsur.pokebatalla.model.moves.Grunido;
+import mx.edu.itsur.pokebatalla.model.moves.Impactrueno;
+import mx.edu.itsur.pokebatalla.model.moves.Lanzallamas;
+import mx.edu.itsur.pokebatalla.model.moves.Latigo;
 import mx.edu.itsur.pokebatalla.model.moves.Movimiento;
 
 /**
  *
  * @author FJML1983
  */
-public class Charmander extends Pokemon {
+public class Charmander extends Pokemon implements Serializable{
 
     /**
      * Movimientos que puede realizar el Pokémon
      */
     public enum Movimientos {
         ATAQUE_RAPIDO,
-        GRUNIDO,
+        LANZALLAMAS;
+
         //Otros movimientos...
     }
-    
+
     public Charmander() {
         tipo = "FUEGO";
         hp = 39;
@@ -37,34 +41,31 @@ public class Charmander extends Pokemon {
         this(); //invocando al constructor default
         this.nombre = nombre;
     }
-    
-    @Override
-    public Enum[] getMovimientos() {
-        return Charmander.Movimientos.values();
-    }    
-    
-    @Override
-    public void atacar(Pokemon oponente, int ordinalMovimiento) {
+@Override
+		public Enum[] getMovimientos() {
+			return Charmander.Movimientos.values();
+		}
 
+    public void atacar(Pokemon oponente, int ordinalMovimiento) {
         //Si el pokemon está agotado no podrá realizar nada.
         if (this.hp <= 0) {
             System.out.println("Charmander esta agotado y no puede realizar mas movimientos.");
             return;
-        }        
-        
-        //Obtener el movimiento de acuerdo a su numero ordinal
-        Charmander.Movimientos movimientoAUtilizar = 
-                Charmander.Movimientos.values()[ordinalMovimiento];
-        
+        }
+
+//Obtener el movimiento de acuerdo a su numero ordinal
+		Charmander.Movimientos movimientoAUtilizar = Charmander.Movimientos.values()[ordinalMovimiento];
+
         //Instanciar el movimiento solicitado
         Movimiento instanciaMovimiento;
         switch (movimientoAUtilizar) {
             case ATAQUE_RAPIDO:
                 instanciaMovimiento = new AtaqueRapido();
                 break;
-            case GRUNIDO:
-                instanciaMovimiento = new Grunido();
+                case LANZALLAMAS:
+                instanciaMovimiento = new Lanzallamas();
                 break;
+
             //Otros movimientos aquí...
             default:
                 throw new AssertionError();
@@ -72,7 +73,6 @@ public class Charmander extends Pokemon {
 
         //Aplicar el movimiento
         instanciaMovimiento.utilizar(this, oponente);
-        
+
     }
-    
 }

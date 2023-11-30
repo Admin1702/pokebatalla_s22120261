@@ -4,6 +4,8 @@
  */
 package mx.edu.itsur.pokebatalla.model.pokemons;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import mx.edu.itsur.pokebatalla.model.moves.AtaqueRapido;
 import mx.edu.itsur.pokebatalla.model.moves.Impactrueno;
 import mx.edu.itsur.pokebatalla.model.moves.Latigo;
@@ -13,7 +15,7 @@ import mx.edu.itsur.pokebatalla.model.moves.Movimiento;
  *
  * @author FJML1983
  */
-public class Pikachu extends Pokemon {
+public class Pikachu extends Pokemon implements Serializable{
 
     /**
      * Movimientos que puede realizar el Pokémon
@@ -41,27 +43,27 @@ public class Pikachu extends Pokemon {
         this(); //invocando al constructor default
         this.nombre = nombre;
     }
+@Override
+		public Enum[] getMovimientos() {
+			return Pikachu.Movimientos.values();
+		}
 
     @Override
-    public Enum[] getMovimientos() {
-        return Pikachu.Movimientos.values();
-    }
-
-    @Override
+    
     public void atacar(Pokemon oponente, int ordinalMovimiento) {
-
         //Si el pokemon está agotado no podrá realizar nada.
         if (this.hp <= 0) {
             System.out.println("Pikachu esta agotado y no puede realizar mas movimientos.");
             return;
         }
 
-        //Obtener el movimiento de acuerdo a su numero ordinal
-        Pikachu.Movimientos movimientoAUtilizar
-                = Pikachu.Movimientos.values()[ordinalMovimiento];
+
+//Obtener el movimiento de acuerdo a su numero ordinal
+		Pikachu.Movimientos movimientoAUtilizar = Pikachu.Movimientos.values()[ordinalMovimiento];
+
 
         //Instanciar el movimiento solicitado
-        Movimiento instanciaMovimiento;
+        Movimiento instanciaMovimiento;        
         switch (movimientoAUtilizar) {
             case IMPACTRUENO:
                 instanciaMovimiento = new Impactrueno();
